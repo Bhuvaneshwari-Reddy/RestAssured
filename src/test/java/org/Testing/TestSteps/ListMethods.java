@@ -3,35 +3,14 @@ package org.Testing.TestSteps;
 import io.restassured.response.Response;
 import org.Testing.Payloads.ListData;
 import org.Testing.Utilities.ApiConfigSingleton;
-import org.Testing.Utilities.PropertiesFileLoad;
 import org.json.simple.JSONObject;
-import org.testng.annotations.Test;
-
-import java.io.IOException;
-import java.util.Properties;
 
 import static io.restassured.RestAssured.given;
 
 public class ListMethods {
     private static  Response Res;
     private static ApiConfigSingleton config=ApiConfigSingleton.getInstance();
-//
-//    private Properties Pr;
-//    private String apiKey;
-//    private String apiToken;
-//    private String baseUrl;
-//    private  String BoardId;
-//
-//    public ListMethods() throws IOException {
-//        this.Pr = PropertiesFileLoad.PropFileLoad("Env.properties");
-//        this.apiKey = Pr.getProperty("APIKey");
-//        this.apiToken = Pr.getProperty("APIToken");
-//        this.baseUrl = Pr.getProperty("Base_URL");
-//        this.BoardId=Pr.getProperty("BoardId");
-//        if (apiKey == null || apiToken == null || baseUrl == null) {
-//            throw new IllegalStateException("Wrong API Key, Token, or Base URL is missing in Env.properties!");
-//        }
-//    }
+
     public Response CreateListonBoard(){
         JSONObject requestBody = ListData.getListRequestBody();
         Res= given()
@@ -178,8 +157,5 @@ return  Res;
 
         return  Res;
     }
-
-
-
 
 }

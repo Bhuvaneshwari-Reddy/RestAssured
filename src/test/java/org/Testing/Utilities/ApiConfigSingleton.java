@@ -3,6 +3,7 @@ package org.Testing.Utilities;
 import java.io.IOException;
 import java.util.Properties;
 
+
 public class ApiConfigSingleton {
     private static ApiConfigSingleton instance;
     private Properties properties;
@@ -13,14 +14,16 @@ public class ApiConfigSingleton {
 
     private ApiConfigSingleton() {
         try {
-            properties = PropertiesFileLoad.PropFileLoad("Env.properties");
-            this.apiKey = properties.getProperty("APIKey");
-            this.apiToken = properties.getProperty("APIToken");
-            this.baseUrl = properties.getProperty("Base_URL");
-            this.boardId = properties.getProperty("BoardId");
+         properties=PropertiesFileLoad.PropFileLoad("Env.properties");
+         this.apiKey=properties.getProperty("APIKey");
+         this.apiToken=properties.getProperty("APIToken");
+         this.baseUrl= properties.getProperty("Base_URL");
+         this.boardId=properties.getProperty("BoardId");
 
-            if (apiKey == null || apiToken == null || baseUrl == null) {
-                throw new IllegalStateException("Missing API Key, Token, or Base URL in Env.properties!");
+            if(apiKey==null||apiToken==null||boardId==null||baseUrl==null){
+throw 
+
+
             }
         } catch (IOException e) {
             throw new RuntimeException("Failed to load API configuration", e);

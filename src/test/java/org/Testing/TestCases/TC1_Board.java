@@ -44,28 +44,6 @@ public class TC1_Board {
         Response Res=http.DeleteRequest(BoardId);
         ResponseValidations.validateResponse(Res, 200);
 }
-
-////    @Test(priority = 4)
-//    public void getList(){
-//   Response Res=http.GetListBoard(BoardId);
-//    ResponseValidations.validateResponse(Res, 200);
-//    idList=Res.jsonPath().getString("id");
-//}
-//@Test(priority = 5)
-//public void createCard(){
-//    Response Res=http.CreateCard(listId);
-//    ResponseValidations.validateResponse(Res, 200);
-//}
-
-
-//    public static  void main(String [] args){
-//        TC1 tc=new TC1();
-//        tc.createBoard();
-//       tc. getBoard();
-//      tc.  updateBoard();
-//      tc.deleteBoard();
-//    }
-
 }
 
 

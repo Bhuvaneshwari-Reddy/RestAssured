@@ -44,7 +44,6 @@ import java.io.IOException;
      @Test(priority =5)
     public void archiveCardInList(){
          Res=http.ArchieveCardInlist(listId);
-//        ResponseValidations.validateListResponse(Res,200);
     }
      @Test(priority =6)
     public void moveAllCardsInList(){

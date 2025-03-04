@@ -7,14 +7,13 @@ import java.util.Properties;
 
 public class PropertiesFileLoad {
 
-    public static Properties PropFileLoad(String path) throws IOException
-    {
+    public static Properties PropFileLoad(String path)throws  IOException{
+
         File f=new File(path);
         FileInputStream fi=new FileInputStream(f);
         Properties pr=new Properties();
         pr.load(fi);
         return pr;
-
     }
 
 }
