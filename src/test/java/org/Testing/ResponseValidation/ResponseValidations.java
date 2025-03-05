@@ -13,7 +13,7 @@ public class ResponseValidations {
         Assert.assertFalse(responseBody.isEmpty(), " Response body is empty");
 
         // Log response details
-        System.out.println("✅ Valid Response Received: " + responseBody);
+        System.out.println(" Valid Response Received: " + responseBody);
     }
 
     // Specific method for Board response validation
@@ -28,7 +28,7 @@ public class ResponseValidations {
         Assert.assertNotNull(boardName, "Wrong Board Name is missing or null");
 
         // Log success message
-        System.out.println("✅ Board Validated - ID: " + boardId + ", Name: " + boardName);
+        System.out.println("Board Validated - ID: " + boardId + ", Name: " + boardName);
     }
     public static void validateListResponse(Response response, int expectedStatusCode) {
         validateResponse(response, expectedStatusCode);
