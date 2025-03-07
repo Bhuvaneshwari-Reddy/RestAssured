@@ -1,7 +1,9 @@
 package org.Testing.TestSteps;
 import com.google.gson.Gson;
 import io.restassured.response.Response;
-import org.Testing.Payloads.BoardData;
+import org.Testing.Payloads.BoardDataJsonArray_pojo;
+import org.Testing.Payloads.BoardDataSimpleJson_pojo;
+import org.Testing.Payloads.BoardDataComplexJson_pojo;
 import org.Testing.Utilities.ApiConfigSingleton;
 import io.restassured.RestAssured;
 
@@ -12,8 +14,8 @@ public class BoardMethods
     private static Response Res;
     private static ApiConfigSingleton config=ApiConfigSingleton.getInstance();
 
-    public  Response PostRequest(BoardData board){
-       board.setName("Bhuvana");
+    public  Response PostRequest(BoardDataSimpleJson_pojo board){
+       board.defaultValues();
        Res= given()
                 .queryParam("key",config.getApiKey())
                 .queryParam("token",config.getApiToken())
@@ -44,11 +46,30 @@ public class BoardMethods
        return  Res;
     }
 
-    public  Response UpdateRequest(BoardData board,String BoardId ) {
+    public  Response UpdateRequest(BoardDataSimpleJson_pojo board, String BoardId) {
         RestAssured.baseURI = config.getBaseUrl();
-        board.defaultValues();
+
+        BoardDataJsonArray_pojo[] switcherViews=new BoardDataJsonArray_pojo[2];
+        switcherViews[0]=new BoardDataJsonArray_pojo();
+        switcherViews[1]=new BoardDataJsonArray_pojo();
+        switcherViews[0].setViewType("Board");
+        switcherViews[0].setEnabled(true);
+        switcherViews[1].setViewType("Table");
+        switcherViews[1].setEnabled(true);
+
+        BoardDataComplexJson_pojo prefs=new BoardDataComplexJson_pojo();
+        prefs.setComments("members");
+        prefs.setBackground("blue");
+        prefs.setInvitations("admins");
+        board.setName("Bhuvana Reddy");
+        board.setDesc("Updated Board");
+        prefs.setSwitcherViews(switcherViews);
+        board.setPrefs(prefs);
+
         Gson gson = new Gson();
         String requestBody = gson.toJson(board);
+        System.out.println(requestBody.toString());
+
 
          Res=given()
                 .queryParam("key",config.getApiKey())

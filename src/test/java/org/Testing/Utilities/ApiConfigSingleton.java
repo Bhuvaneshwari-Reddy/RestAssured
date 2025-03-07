@@ -11,6 +11,7 @@ public class ApiConfigSingleton {
     private String apiToken;
     private String baseUrl;
     private String boardId;
+    private  String listId;
 
     private ApiConfigSingleton() {
         try {
@@ -19,6 +20,7 @@ public class ApiConfigSingleton {
          this.apiToken=properties.getProperty("APIToken");
          this.baseUrl= properties.getProperty("Base_URL");
          this.boardId=properties.getProperty("BoardId");
+         this.listId=properties.getProperty("ListId");
 
             if(apiKey==null||apiToken==null||boardId==null||baseUrl==null){
              throw  new IllegalStateException("Missing key,token,url and id in Env.properties");
@@ -27,17 +29,6 @@ public class ApiConfigSingleton {
             throw new RuntimeException("Failed to load API configuration", e);
         }
     }
-
-//    public static ApiConfigSingleton getInstance() {
-//        if (instance == null) {
-//            synchronized (ApiConfigSingleton.class) {
-//                if (instance == null) {
-//                    instance = new ApiConfigSingleton();
-//                }
-//            }
-//        }
-//        return instance;
-//    }
 
     public static ApiConfigSingleton getInstance(){
         if(instance==null){
@@ -55,10 +46,6 @@ public class ApiConfigSingleton {
         return apiKey;
     }
 
-    public void setKey(String apiKey){
-        this.apiKey=apiKey;
-    }
-
     public String getApiToken() {
         return apiToken;
     }
@@ -69,5 +56,9 @@ public class ApiConfigSingleton {
 
     public String getBoardId() {
         return boardId;
+    }
+    public  String getListId(){
+
+        return  listId;
     }
 }
