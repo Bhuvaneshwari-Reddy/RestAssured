@@ -1,11 +1,15 @@
 package org.Testing.TestSteps;
 import com.google.gson.Gson;
+import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.response.Response;
+import io.restassured.specification.RequestSpecification;
 import org.Testing.Payloads.BoardDataJsonArray_pojo;
 import org.Testing.Payloads.BoardDataSimpleJson_pojo;
 import org.Testing.Payloads.BoardDataComplexJson_pojo;
 import org.Testing.Utilities.ApiConfigSingleton;
 import io.restassured.RestAssured;
+import org.testng.annotations.BeforeClass;
+
 
 import static io.restassured.RestAssured.*;
 
@@ -13,13 +17,26 @@ public class BoardMethods
 {
     private static Response Res;
     private static ApiConfigSingleton config=ApiConfigSingleton.getInstance();
+    private static RequestSpecification requestSpec;
 
+    public BoardMethods(){
+        if(requestSpec==null){
+            setupRequestSpec();
+        }
+    }
+    @BeforeClass
+    public  void setupRequestSpec(){
+      requestSpec =new RequestSpecBuilder()
+              .addQueryParam("key",config.getApiKey())
+              .addQueryParam("token",config.getApiToken())
+              .addHeader("Content-Type", "application/json")
+              .build();
+
+    }
     public  Response PostRequest(BoardDataSimpleJson_pojo board){
        board.defaultValues();
        Res= given()
-                .queryParam("key",config.getApiKey())
-                .queryParam("token",config.getApiToken())
-                .header("Content-Type", "application/json")
+               .spec(requestSpec)
                 .body(board)
                 .when()
                 .post(config.getBaseUrl()+"boards/")
@@ -35,9 +52,7 @@ public class BoardMethods
     }
         RestAssured.baseURI = config.getBaseUrl();
         Res= given()
-                .queryParam("key",config.getApiKey())
-                .queryParam("token",config.getApiToken())
-                .header("Content-type","application/json")
+                .spec(requestSpec)
                 .when()
                 .get("boards/"+BoardId)
                 .then()
@@ -72,9 +87,7 @@ public class BoardMethods
 
 
          Res=given()
-                .queryParam("key",config.getApiKey())
-                .queryParam("token",config.getApiToken())
-                .header("Content-type","application/json")
+                 .spec(requestSpec)
                 .body(requestBody)
                 .when()
                 .put("boards/"+BoardId)
@@ -88,9 +101,7 @@ public class BoardMethods
 
        RestAssured.baseURI = config.getBaseUrl();
          Res=given()
-                .queryParam("key",config.getApiKey())
-                .queryParam("token",config.getApiToken())
-                .header("Content-type","application/json")
+                 .spec(requestSpec)
                 .when()
                 .delete("boards/"+BoardId)
                 .then()
