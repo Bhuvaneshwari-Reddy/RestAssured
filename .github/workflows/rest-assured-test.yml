@@ -41,19 +41,19 @@ on:
 
 jobs:
   build:
-    runs-on: windows-latest
+    runs-on: windows-latest  # Use Windows runner
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v2  # Checkout repository code
 
       - name: Set up JDK 17
-        uses: actions/setup-java@v2
+        uses: actions/setup-java@v2  # Set up Java 17
         with:
           java-version: '17'
 
       - name: Cache Maven dependencies
-        uses: actions/cache@v3  # Updated to v3 for the latest version
+        uses: actions/cache@v3  # Cache Maven dependencies to speed up builds
         with:
           path: C:\Users\runneradmin\.m2\repository
           key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
@@ -61,14 +61,14 @@ jobs:
             ${{ runner.os }}-maven-
 
       - name: Build with Maven
-        run: mvn clean install -DskipTests=false
+        run: mvn clean install -DskipTests=false  # Run Maven build
 
       - name: Run tests
-        run: mvn test
+        run: mvn test  # Run Maven tests
 
       - name: Upload test results
-        if: always()
-        uses: actions/upload-artifact@v2
+        if: always()  # Upload test results even if tests fail
+        uses: actions/upload-artifact@v3  # Upload artifacts
         with:
           name: test-results
-          path: target/test-classes
+          path: target/surefire-reports  # Path to the test results folder
