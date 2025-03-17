@@ -45,15 +45,15 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2  # Checkout repository code
+        uses: actions/checkout  # Checkout repository code
 
       - name: Set up JDK 17
-        uses: actions/setup-java@v2  # Set up Java 17
+        uses: actions/setup-java  # Set up Java 17
         with:
           java-version: '17'
 
       - name: Cache Maven dependencies
-        uses: actions/cache@v3  # Cache Maven dependencies to speed up builds
+        uses: actions/cache  # Cache Maven dependencies to speed up builds
         with:
           path: C:\Users\runneradmin\.m2\repository
           key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
@@ -68,7 +68,7 @@ jobs:
 
       - name: Upload test results
         if: always()  # Upload test results even if tests fail
-        uses: actions/upload-artifact@v3  # Upload artifacts
+        uses: actions/upload-artifact  # Upload artifacts
         with:
           name: test-results
           path: target/surefire-reports  # Path to the test results folder
