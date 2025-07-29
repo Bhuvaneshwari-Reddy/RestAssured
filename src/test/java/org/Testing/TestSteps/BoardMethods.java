@@ -24,6 +24,7 @@ public class BoardMethods
             setupRequestSpec();
         }
     }
+
     @BeforeClass
     public  void setupRequestSpec(){
       requestSpec =new RequestSpecBuilder()
@@ -50,11 +51,10 @@ public class BoardMethods
     if (BoardId == null || BoardId.isEmpty()) {
         throw new IllegalStateException("BoardId is null or empty. Ensure createBoard() runs first.");
     }
-        RestAssured.baseURI = config.getBaseUrl();
         Res= given()
                 .spec(requestSpec)
                 .when()
-                .get("boards/"+BoardId)
+                .get(config.getBaseUrl()+"boards/"+BoardId)
                 .then()
                 .statusCode(200)
                 .extract().response();
@@ -62,7 +62,6 @@ public class BoardMethods
     }
 
     public  Response UpdateRequest(BoardDataSimpleJson_pojo board, String BoardId) {
-        RestAssured.baseURI = config.getBaseUrl();
 
         BoardDataJsonArray_pojo[] switcherViews=new BoardDataJsonArray_pojo[2];
         switcherViews[0]=new BoardDataJsonArray_pojo();
@@ -90,7 +89,7 @@ public class BoardMethods
                  .spec(requestSpec)
                 .body(requestBody)
                 .when()
-                .put("boards/"+BoardId)
+                .put(config.getBaseUrl()+"boards/"+BoardId)
                 .then()
                 .statusCode(200)
                 .extract().response();
@@ -98,12 +97,10 @@ public class BoardMethods
     }
 
    public Response DeleteRequest(String BoardId){
-
-       RestAssured.baseURI = config.getBaseUrl();
          Res=given()
                  .spec(requestSpec)
                 .when()
-                .delete("boards/"+BoardId)
+                .delete(RestAssured.baseURI+"boards/"+BoardId)
                 .then()
                 .statusCode(200)
                 .extract().response();

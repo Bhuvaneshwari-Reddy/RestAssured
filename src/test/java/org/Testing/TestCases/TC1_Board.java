@@ -23,12 +23,14 @@ public class TC1_Board {
         board = new BoardDataSimpleJson_pojo();
         Response Res = http.PostRequest(board);
         BoardId=Res.jsonPath().getString("id");
+        System.out.println("Created Board ID: " + BoardId);
         ResponseValidations.validateBoardResponse(Res, 200,BoardId);
 
     }
 
     @Test(priority = 2)
     public void getBoard() {
+        System.out.println(BoardId);
         Response Res=http.GetRequest(BoardId);
         ResponseValidations.validateBoardResponse(Res, 200,BoardId);
     }

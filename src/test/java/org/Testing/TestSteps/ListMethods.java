@@ -9,6 +9,7 @@ import org.json.simple.JSONObject;
 import org.testng.annotations.BeforeClass;
 
 import static io.restassured.RestAssured.given;
+import static io.restassured.RestAssured.responseSpecification;
 
 public class ListMethods {
 
@@ -92,9 +93,10 @@ return Res;
         return Res;
     }
     public Response MoveAllCardsInList(String  listId){
+        System.out.println(listId);
         Res= given()
                 .queryParam("idBoard",config.getBoardId())
-                  .queryParam("idList",listId)
+                .queryParam("idList",listId)
                 .spec(requestSpec)
                 .when()
                 .post(config.getBaseUrl()+"lists/"+listId+"/moveAllCards/")

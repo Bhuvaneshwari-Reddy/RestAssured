@@ -18,6 +18,7 @@ import java.io.IOException;
     public void beforeClass() throws IOException {
         http = new ListMethods();
     }
+
 @Test(priority =1)
     public void createList(){
          Res =http.CreateListonBoard();
@@ -25,36 +26,48 @@ import java.io.IOException;
         System.out.println(listId);
     ResponseValidations.validateListResponse(Res, 200,listId);
     }
+
+
      @Test(priority =2)
      public void getList(){
          Res=http.GetList(listId);
         ResponseValidations.validateListResponse(Res, 200,listId);
     }
+
+
      @Test(priority =3)
     public void updateList() {
      Res=http.UpdateList(listId);
         ResponseValidations.validateListResponse(Res, 200,listId);
     }
+
+
      @Test(priority =4)
     public void createCardInList(){
          Res=http.CreateCardInList(listId);
         ResponseValidations.validateListResponse(Res,200,listId);
          cardId = Res.jsonPath().getString("id");
     }
+
+
      @Test(priority =5)
     public void archiveCardInList(){
          Res=http.ArchieveCardInlist(listId);
     }
+
+
      @Test(priority =6)
     public void moveAllCardsInList(){
         Res=http.MoveAllCardsInList(listId);
     }
+
 
      @Test(priority =7)
      public void archiveList() {
         Res=http.ArchiveList(listId);
         ResponseValidations.validateListResponse(Res,200,listId);
      }
+
 
      @Test(priority = 8)
      public void moveList() {

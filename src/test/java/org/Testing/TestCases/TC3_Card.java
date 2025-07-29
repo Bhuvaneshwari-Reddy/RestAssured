@@ -29,11 +29,15 @@ public  void createCard(){
      Res=http.GetCard(cardid);
        ResponseValidations.validateCardResponse(Res,200,cardid);
    }
+
+
    @Test(priority = 3)
     public void updateCard(){
      Res=http.UpdateCard(cardid);
      ResponseValidations.validateCardResponse(Res,200,cardid);
    }
+
+
    @Test(priority = 4)
    public void deleteCard(){
      Res=http.DeleteCard(cardid);
